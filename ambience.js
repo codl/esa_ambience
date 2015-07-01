@@ -9,23 +9,11 @@ window.ambience = function() {
         audio.loop = true;
 
         (function(audio, input){
-            var progress = function progress(){
-                var bar = document.querySelector("label[for=" + input.id + "] .progress");
-                if(audio.buffered.length > 0 && audio.duration) {
-                    bar.style.width = (100 - audio.buffered.end(0) * 100 / audio.duration) + "%";
-                }
-            };
 
-            audio.addEventListener("progress", progress);
 
-            var load = function load(){
-                var bar = document.querySelector("label[for=" + input.id + "] .progress");
-                bar.style.width = 0;
-            };
 
-            audio.addEventListener("load", load);
 
-            var input_ = function input_(){
+            var change = function change(){
                 if(input.checked){
                     for(var id in audios){
                         if(id == input.id){
@@ -38,7 +26,7 @@ window.ambience = function() {
                 }
             };
 
-            input.addEventListener("change", input_);
+            input.addEventListener("change", change);
         })(audio, input);
 
         var opus_source = document.createElement("source");
