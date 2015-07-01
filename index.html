@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+    <head>
+        <title>ESA ambience</title>
+        <style></style>
+        <link rel="stylesheet" href="ambience.css"/>
+        <script defer src="ambience.js" onload="ambience()"></script>
+    </head>
+    <body>
+        <div class="chooser">
+            <input id="setup" type="radio" data-filename-prefix="setup" name="ambience-chooser"/>
+            <label for="setup">
+                Setup
+                <div class="progress"></div>
+            </label>
+
+            <input id="run" type="radio" data-filename-prefix="run" name="ambience-chooser"/>
+            <label for="run">
+                Run
+                <div class="progress"></div>
+            </label>
+
+            <input id="sidelines" type="radio" data-filename-prefix="sidelines" name="ambience-chooser"/>
+            <label for="sidelines">
+                Sidelines
+                <div class="progress"></div>
+            </label>
+        </div>
+    </body>
+</html>
+
