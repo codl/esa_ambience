@@ -1,4 +1,5 @@
 window.ambience = function() {
+    "use strict";
     var inputs = document.querySelectorAll(".chooser input");
     var audios = {};
 
@@ -32,7 +33,7 @@ window.ambience = function() {
 
                 fade = setTimeout(fadeinout, 500, sign);
             }
-            audio.fadein = function fadein(){ fadeinout(+1); };
+            audio.fadein = function fadein(){ audio.play(); fadeinout(+1); };
             audio.fadeout = function fadeout(){ fadeinout(-1); };
 
             var loadedmetadata = function loadedmetadata(){
@@ -46,12 +47,17 @@ window.ambience = function() {
             var change = function change(){
                 if(input.checked){
                     for(var id in audios){
+                        var audio = audios[id];
                         if(id == input.id){
-                            audios[id].play();
-                            audios[id].fadein();
+                            if(audio.readyState == audio.HAVE_ENOUGH_DATA){
+                                audio.fadein();
+                            }
+                            else {
+                                audio.addEventListener("canplaythrough", audio.fadein);
+                            }
                         }
-                        else if(!audios[id].paused) {
-                            audios[id].fadeout();
+                        else if(!audio.paused) {
+                            audio.fadeout();
                         }
                     }
                 }
