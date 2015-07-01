@@ -10,12 +10,11 @@ div.chooser {
     position: absolute;
     top: 0; bottom: 0; left: 0; right: 0;
     max-height: 20em;
-    max-width: 40em;
+    max-width: 60em;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     padding: 8vw;
-    font-size: 1.5em;
 }
 
 @media screen and (max-width: 800px) {
@@ -23,13 +22,21 @@ div.chooser {
 }
 
 .chooser label {
-    flex: 0 1;
-    margin: 1em;
+    flex: 1;
+    margin: 2em;
     text-align: center;
     display: block;
     min-width: 5em;
     padding: 1em 2em;
     background: purple;
+    font-size: 1.3em;
+    box-shadow: 0 10px transparent, 0 -10px transparent;
+    transition: box-shadow 0.4s ease-out;
+}
+
+.chooser label:hover {
+    box-shadow: 0 2px orange, 0 -2px orange;
+    cursor: pointer;
 }
 
 .chooser input{
@@ -38,4 +45,9 @@ div.chooser {
 
 .chooser input[type=radio]:checked + label {
     background: orange;
+}
+
+.chooser input[type=radio]:checked + label:hover {
+    box-shadow: 0 0 transparent, 0 0 transparent;
+    cursor: default;
 }
