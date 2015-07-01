@@ -10,6 +10,7 @@ window.ambience = function() {
         var audio = document.createElement("audio");
         audio.loop = true;
         audio.volume = 0;
+        audio.preload = "auto";
 
         (function(audio, input){
             var fade;
@@ -19,7 +20,6 @@ window.ambience = function() {
                     fade = null;
                 }
 
-                console.log(input.id, audio.volume);
                 var newvol = audio.volume + .04 * sign;
                 audio.volume = Math.max(0, Math.min(1, newvol));
 
@@ -38,8 +38,6 @@ window.ambience = function() {
 
             var loadedmetadata = function loadedmetadata(){
                 audio.currentTime = audio.duration * Math.random();
-                console.log(audio.currentTime, audio.duration);
-                audio.removeEventListener(loadedmetadata);
             }
 
             audio.addEventListener("loadedmetadata", loadedmetadata);
