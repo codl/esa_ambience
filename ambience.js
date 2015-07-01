@@ -18,21 +18,30 @@ window.ambience = function() {
                     fade = null;
                 }
 
+                console.log(input.id, audio.volume);
                 var newvol = audio.volume + .04 * sign;
                 audio.volume = Math.max(0, Math.min(1, newvol));
 
-                if(sign >= 0 && audio.volume >= 0.99){
+                if(sign >= 0 && audio.volume >= 0.95){
                     return
                 }
-                if(sign < 0 && audio.volume <= 0.01){
+                if(sign < 0 && audio.volume <= 0.05){
                     audio.pause();
                     return;
                 }
 
-                var fade = setTimeout(fadeinout, 500, sign);
+                fade = setTimeout(fadeinout, 500, sign);
             }
             audio.fadein = function fadein(){ fadeinout(+1); };
             audio.fadeout = function fadeout(){ fadeinout(-1); };
+
+            var loadedmetadata = function loadedmetadata(){
+                audio.currentTime = audio.duration * Math.random();
+                console.log(audio.currentTime, audio.duration);
+                audio.removeEventListener(loadedmetadata);
+            }
+
+            audio.addEventListener("loadedmetadata", loadedmetadata);
 
             var change = function change(){
                 if(input.checked){
